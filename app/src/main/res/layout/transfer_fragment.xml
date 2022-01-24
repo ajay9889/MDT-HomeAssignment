@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgcolorgradient">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/inputBoxContainer"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_margin="20dp"
+        app:layout_constraintVertical_bias="0.3"
+        android:background="@drawable/whitbox_shadow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".Presentation.Fragments.FirstFragment">
+
+        <TextView
+            android:id="@+id/titleMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transfer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/selectPayees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="14"
+            android:inputType="text"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColorHint="@color/grey_transparent_layout"
+            android:hint="Enter name of Payee"
+            android:imeOptions="actionNext"
+            app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleMessage" ><requestFocus></requestFocus></AutoCompleteTextView>
+
+        <EditText
+            android:id="@+id/editTextAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="14"
+            android:inputType="number"
+            android:digits="01234567890."
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColorHint="@color/grey_transparent_layout"
+            android:hint="Set Amount"
+            android:imeOptions="actionNext"
+            app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/selectPayees" />
+
+
+        <EditText
+            android:id="@+id/editTextDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="14"
+            android:inputType="textPassword"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:imeActionId="6"
+            android:imeOptions="actionDone"
+            android:hint="Descriptions"
+            android:textColorHint="@color/grey_transparent_layout"
+            app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTextAmount" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/buttonTransfer"
+        android:layout_width="@dimen/btn_size"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_bg"
+        android:text="@string/transfer_amount"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/inputBoxContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

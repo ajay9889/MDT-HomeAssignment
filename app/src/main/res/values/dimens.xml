@@ -1,0 +1,31 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="ds_text_size_default">12sp</dimen>
+    <dimen name="ds_text_size_small">10sp</dimen>
+    <dimen name="ds_text_size_medium">18sp</dimen>
+    <dimen name="ds_text_size_large">22sp</dimen>
+    <dimen name="ds_text_size_xlarge">26sp</dimen>
+    <dimen name="ds_text_size_xxlarge">28sp</dimen>
+
+    <dimen name="menu_icon_size">24dp</dimen>
+    <dimen name="padding">10dp</dimen>
+    <dimen name="corner_radius">15dp</dimen>
+
+    <dimen name="box_digit">42dp</dimen>
+
+    <dimen name="pin_spacing">10dp</dimen>
+
+    <dimen name="corner_btn_radius">20dp</dimen>
+    <dimen name="btn_size">170dp</dimen>
+
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="padding_32">32dp</dimen>
+    <dimen name="padding_64">64dp</dimen>
+    <dimen name="header_hieght">80dp</dimen>
+
+    <dimen name="item_list">140dp</dimen>
+    <dimen name="item_company_list">120dp</dimen>
+
+</resources>

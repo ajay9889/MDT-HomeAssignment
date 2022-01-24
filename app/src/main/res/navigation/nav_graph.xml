@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+    <fragment
+        android:id="@+id/signinFrgmnt"
+        android:name="com.test.companydata.stfrontentengchallenge.Presentation.Fragments.SignInFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/signin">
+        <action
+            android:id="@+id/action_signin_to_register"
+            app:destination="@id/registerFrgmnt" />
+
+        <action
+            android:id="@+id/action_signinFrgmnt_to_mobileFragment"
+            app:destination="@id/mobileFragment" />
+        <action
+            android:id="@+id/action_signinFrgmnt_to_otpFragment"
+            app:destination="@id/otpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFrgmnt"
+        android:name="com.test.companydata.stfrontentengchallenge.Presentation.Fragments.RegisterFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/register">
+        <action
+            android:id="@+id/action_registerFrgmnt_to_otpFragment"
+            app:destination="@id/otpFragment" />
+        <action
+            android:id="@+id/action_registerFrgmnt_to_signinFrgmnt"
+            app:destination="@id/signinFrgmnt" />
+        <action
+            android:id="@+id/action_registerFrgmnt_to_mobileFragment"
+            app:destination="@id/mobileFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.test.companydata.stfrontentengchallenge.Presentation.Fragments.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/splashfragment">
+        <action
+            android:id="@+id/action_splashFragment_to_signinFrgmnt"
+            app:destination="@id/signinFrgmnt" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpFragment"
+        android:name="com.test.companydata.stfrontentengchallenge.Presentation.Fragments.OtpFragment"
+        android:label="OtpFragment"
+        tools:layout="@layout/otpfragment">
+    </fragment>
+    <fragment
+        android:id="@+id/mobileFragment"
+        android:name="com.test.companydata.stfrontentengchallenge.Presentation.Fragments.MobileFragment"
+        android:label="MobileFragment"
+        tools:layout="@layout/mobilenumberfragment">
+        <action
+            android:id="@+id/action_mobileFragment_to_otpFragment"
+            app:destination="@id/otpFragment" />
+    </fragment>
+</navigation>

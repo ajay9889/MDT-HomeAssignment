@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.test.companydata.stfrontentengchallenge">
+<uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/app_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/app_icon"
+        android:supportsRtl="true"
+        android:name=".MainApplication"
+        android:theme="@style/Theme.STFrontentEngChallenge">
+        <activity
+            android:name=".Presentation.Activity.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:recreateOnConfigChanges="mnc"
+            android:windowSoftInputMode="stateUnchanged"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.STFrontentEngChallenge.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Presentation.Activity.HomeActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:recreateOnConfigChanges="mnc"
+            android:windowSoftInputMode="stateUnchanged"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.STFrontentEngChallenge.NoActionBar">
+        </activity>
+        <activity
+            android:name=".Core.base.SingleFragmentActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:recreateOnConfigChanges="mnc"
+            android:windowSoftInputMode="stateUnchanged"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.STFrontentEngChallenge.NoActionBar">
+        </activity>
+    </application>
+
+</manifest>
