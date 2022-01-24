@@ -4,11 +4,13 @@ import com.test.companydata.Core.networkutils.CacheInterceptor
 import com.test.companydata.Core.networkutils.OnlineCacheInterceptor
 import com.test.companydata.stfrontentengchallenge.BuildConfig
 import com.test.companydata.stfrontentengchallenge.Core.networkutils.HeaderIntercepter
-import com.test.companydata.stfrontentengchallenge.DataSource.repository.AccountDataReposityImpl
+import com.test.companydata.stfrontentengchallenge.DataSource.repository.AccountDataRepositoryImpl
+import com.test.companydata.stfrontentengchallenge.DataSource.repository.LocalRepositoryImpl
+import com.test.companydata.stfrontentengchallenge.DataSource.repository.UserRepositoryImpl
+import com.test.companydata.stfrontentengchallenge.Domain.repository.LocalRepository
 import com.test.companydata.stfrontentengchallenge.MainApplication
 import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.UserAccountViewModel
-import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.dashboard.HomeViewModel
-import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.dashboard.SearchViewModel
+import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.HomeViewModel
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -24,8 +26,6 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 val appModule = module {
-
-
     single{
         OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
@@ -51,20 +51,22 @@ val appModule = module {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .build()
     }
-    single {
-        AccountDataReposityImpl(androidContext() , get())
-    }
 }
 val viewModelModule = module {
+    single {
+        LocalRepositoryImpl(androidContext())
+    }
+    single {
+        UserRepositoryImpl(androidContext() , get())
+    }
+    single {
+        AccountDataRepositoryImpl(androidContext() , get())
+    }
     viewModel {
-        UserAccountViewModel(androidApplication() as MainApplication)
+        UserAccountViewModel(androidApplication() as MainApplication,  UserRepositoryImpl(androidContext() , get()))
     }
     viewModel {
         HomeViewModel(androidApplication() as MainApplication, get())
     }
-    viewModel {
-        SearchViewModel(androidApplication() as MainApplication, get())
-    }
-
 
 }

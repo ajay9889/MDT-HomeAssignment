@@ -24,7 +24,7 @@
     <string name="resendotp"><u>Resend OTP</u></string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
-    <string name="warning">Oops..</string>
+    <string name="warning">Alert!</string>
     <string name="net_error_warning">Network error!</string>
     <string name="net_error">Please check internet connection.</string>
     <string name="normal_error">Try again, Possible no records..!</string>
@@ -32,14 +32,11 @@
     <string name="transfer">Transfer</string>
     <string name="transfer_amount">Transfer Now</string>
     <string name="invalid_request">Invalid request</string>
-<!--    <string name="invalid_request">Invalid request</string>-->
     <string name="dashboard_title_toolbar">Dashboard</string>
-    <string name="portfolio_title_toolbar">Portfolio</string>
-
     <string name="gainlosstitle">Gainers and Lossers</string>
     <string name="watchlisttitle">Your Watchlist</string>
 
-    <string name="some_error">Some Error Ocured, Please try again!</string>
+    <string name="some_error">Some Error Occurred, Please try again!</string>
     <string name="search_hint">Search symbols e.g. AAPL, MSFT, NFLX</string>
     <string name="search_copytext">Search your interests to follow on the NYSE/Nasdaq stock exchanges, learn more information about the stocks, and add them to your portfolio</string>
 

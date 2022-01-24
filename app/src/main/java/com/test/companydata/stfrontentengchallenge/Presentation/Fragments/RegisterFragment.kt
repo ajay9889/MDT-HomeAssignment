@@ -1,6 +1,7 @@
 package com.test.companydata.stfrontentengchallenge.Presentation.Fragments
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.test.companydata.Core.apputils.DsAlert
 import com.test.companydata.Core.base.BaseFragment
 import com.test.companydata.stfrontentengchallenge.Core.Util.Utils
+import com.test.companydata.stfrontentengchallenge.Presentation.Activity.HomeActivity
 import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.UserAccountViewModel
 import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.ViewState
 import com.test.companydata.stfrontentengchallenge.R
@@ -46,7 +48,7 @@ class RegisterFragment : BaseFragment<RegisterBinding>(RegisterBinding::inflate)
             }
             buttonSignUP.setOnClickListener {
                 if(validateField())
-                userAccountViewModel.onSignup(requireActivity(), editTextEmail.text.toString(),editTextPassword.text.toString())
+                    userAccountViewModel.createUserAccount(editTextUserName.text.toString(), editTextPassword.text.toString());
             }
 
 
@@ -58,7 +60,7 @@ class RegisterFragment : BaseFragment<RegisterBinding>(RegisterBinding::inflate)
                 ): Boolean {
                     if (actionId == EditorInfo.IME_ACTION_DONE &&  !editTextPassword.text.toString().isNullOrBlank()) {
                         if(validateField())
-                            userAccountViewModel.onSignup(requireActivity(), editTextEmail.text.toString(),editTextPassword.text.toString())
+                            userAccountViewModel.createUserAccount(editTextUserName.text.toString(), editTextPassword.text.toString());
                         return true;
                     }
                     return false;
@@ -70,27 +72,22 @@ class RegisterFragment : BaseFragment<RegisterBinding>(RegisterBinding::inflate)
     fun validateField(): Boolean{
 
        with(viewBinding){
-           editTextEmail.setError(null)
+           editTextUserName.setError(null)
            editTextPassword.setError(null)
-            if(editTextEmail.text.toString().isNullOrBlank())
+            if(editTextUserName.text.toString().isNullOrBlank())
             {
-                editTextEmail.setError("Enter Email")
-                editTextEmail.isFocusable =true
+                editTextUserName.setError("Enter Username")
+                editTextUserName.isFocusable =true
                 return false
-            }else if(!Utils.isValidEmail(editTextEmail.text.toString()))
-             {
-               editTextEmail.setError("Enter Valid Email")
-               editTextEmail.isFocusable =true
-               return false
-             }else  if(editTextPassword.text.toString().isNullOrBlank())
+            }else  if(editTextPassword.text.toString().isNullOrBlank())
                {
-                   editTextEmail.setError("Enter Password")
-                   editTextEmail.isFocusable =true
+                   editTextUserName.setError("Enter Password")
+                   editTextUserName.isFocusable =true
                    return false
                }else  if(editTextPassword.text.toString().length<6)
                {
                    editTextPassword.setError("Password length at least 6 character")
-                   editTextEmail.isFocusable =true
+                   editTextUserName.isFocusable =true
                    return false
                }
        }
@@ -105,7 +102,8 @@ class RegisterFragment : BaseFragment<RegisterBinding>(RegisterBinding::inflate)
                 }
                 is ViewState.Content -> {
                     dialog?.cancel()
-                    findNavController().navigate(R.id.action_registerFrgmnt_to_mobileFragment)
+                    requireActivity().startActivity(Intent(context, HomeActivity::class.java))
+                    requireActivity().finish()
                 }
                 is ViewState.Message -> {
                     dialog?.cancel()

@@ -3,7 +3,9 @@ import com.test.companydata.stfrontentengchallenge.DataSource.module.BalanceData
 import com.test.companydata.stfrontentengchallenge.DataSource.module.PayeesData
 import com.test.companydata.stfrontentengchallenge.DataSource.module.TransactionData
 import com.test.companydata.stfrontentengchallenge.DataSource.module.UserInfoRemoteData
+import okhttp3.RequestBody
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -13,16 +15,14 @@ interface ApiEndpoints {
     // User Account
     @POST("register")
     suspend fun createNewAccount(
-        @Query("username") username: String,
-        @Query("password") password: String
+        @Body params : RequestBody
     ): Response<UserInfoRemoteData>
 
     // POST request to get the user login
     @POST("login")
     suspend fun getUserLogin(
-        @Query("username") username: String,
-        @Query("password") password: String):
-            Response<UserInfoRemoteData>
+        @Body params : RequestBody
+    ):Response<UserInfoRemoteData>
 
 
     // Get the User balances
@@ -38,9 +38,6 @@ interface ApiEndpoints {
 
     @GET("transactions")
     suspend fun getTransferBalance(
-        @Query("recipientAccountNo") username: String,
-        @Query("amount") amount: String,
-        @Query("date") date: String,
-        @Query("description") description: String,
+        @Body params : RequestBody
     ):Response<BalanceData>
 }

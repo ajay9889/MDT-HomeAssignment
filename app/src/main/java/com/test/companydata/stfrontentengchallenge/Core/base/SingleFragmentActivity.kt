@@ -30,9 +30,6 @@ class SingleFragmentActivity:  BaseAppActivity<ActivitySingleFragmentBinding>(Ac
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
                 val mFragment= Class.forName(intent.getStringExtra(EX_FRAGMENT_NAME)).newInstance()
-                if(mFragment is DetailsFragment)
-                    add<DetailsFragment>(R.id.fragment_container_view,
-                        args = intent.getBundleExtra(EX_BUNDLE))
                 if(mFragment is HomeFragment)
                     add<HomeFragment>(R.id.fragment_container_view,
                         args = intent.getBundleExtra(EX_BUNDLE))

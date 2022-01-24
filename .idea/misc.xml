@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/bgcolorgradient.xml" value="0.17864583333333334" />
+        <entry key="app/src/main/res/drawable/button_bg.xml" value="0.17864583333333334" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.17864583333333334" />
         <entry key="app/src/main/res/drawable/ic_baseline_business_center_24.xml" value="0.17864583333333334" />
         <entry key="app/src/main/res/drawable/ic_baseline_dashboard_24.xml" value="0.17864583333333334" />

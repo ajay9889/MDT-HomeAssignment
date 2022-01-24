@@ -6,25 +6,25 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.test.companydata.stfrontentengchallenge.Domain.module.SectionType
-import com.test.companydata.stfrontentengchallenge.Presentation.Adapter.ViewHolders.*
+import com.test.companydata.stfrontentengchallenge.Domain.model.DashaboardItems
+import com.test.companydata.stfrontentengchallenge.Presentation.Adapter.ViewHolders.BalanceItemViewHolder
+import com.test.companydata.stfrontentengchallenge.Presentation.Adapter.ViewHolders.TransactionItemViewHolder
 
 class DashboardListAdapter(private val context: Context,
-
-                           private val onClickItems: ((CompanyListData)->Unit)? =null
-): PagingDataAdapter<DashboardData, RecyclerView.ViewHolder> (DataDifferentiator){
-    object DataDifferentiator: DiffUtil.ItemCallback<DashboardData>(){
-        override fun areItemsTheSame(oldItem: DashboardData, newItem: DashboardData): Boolean {
-            return oldItem.itemList == newItem.itemList
+        private val onClickItems: ((DashaboardItems)->Unit)? =null
+): PagingDataAdapter<DashaboardItems, RecyclerView.ViewHolder> (DataDifferentiator){
+    object DataDifferentiator: DiffUtil.ItemCallback<DashaboardItems>(){
+        override fun areItemsTheSame(oldItem: DashaboardItems, newItem: DashaboardItems): Boolean {
+            return oldItem == newItem
         }
-        override fun areContentsTheSame(oldItem: DashboardData, newItem: DashboardData): Boolean {
-            return oldItem.itemList == newItem.itemList
+        override fun areContentsTheSame(oldItem: DashaboardItems, newItem: DashaboardItems): Boolean {
+            return oldItem == newItem
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         getItem(position)?.let {
-            if(it.category_type == SectionType.TITLE)
+            if(it is DashaboardItems.Ballance)
                 return 0
             else{
                 return 1
@@ -34,12 +34,17 @@ class DashboardListAdapter(private val context: Context,
     }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
-            is TitleItemViewHolder ->{
-                getItem(position)?.let { holder.bindView(it) }
+            is BalanceItemViewHolder ->{
+                getItem(position)?.let {it->
+                    if(it is DashaboardItems.Ballance )
+                    holder.bindView(it)
+                }
             }
-
-            is DashboardRowItemViewHolder ->{
-                getItem(position)?.let { (holder).bindView( it) }
+            is TransactionItemViewHolder ->{
+                getItem(position)?.let {
+                    if(it is DashaboardItems.Transactions )
+                        holder.bindView(it)
+                }
             }
         }
     }
@@ -47,10 +52,10 @@ class DashboardListAdapter(private val context: Context,
         Log.d("viewType" ,"$viewType")
         return  when(viewType){
             0->{
-                TitleItemViewHolder(parent)
+                BalanceItemViewHolder(parent)
             }
             else->{
-                DashboardRowItemViewHolder(parent,onClickItems)
+                TransactionItemViewHolder(parent,onClickItems)
             }
         }
     }

@@ -11,7 +11,7 @@
         android:id="@+id/mainTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To manage banking \nfrom your finger!"
+        android:text="Manage your bank \naccount!"
         app:layout_constraintBottom_toTopOf="@+id/inputBoxContainer"
         app:layout_constraintEnd_toEndOf="parent"
         android:textStyle="bold"

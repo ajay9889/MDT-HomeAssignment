@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.test.companydata.Core.apputils.DsAlert
 import com.test.companydata.Core.base.BaseFragment
-import com.test.companydata.Core.networkutils.NetworkConnectivity
 import com.test.companydata.stfrontentengchallenge.Core.base.SingleFragmentActivity
+import com.test.companydata.stfrontentengchallenge.Domain.model.DashaboardItems
 import com.test.companydata.stfrontentengchallenge.Presentation.Adapter.DashboardListAdapter
-import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.dashboard.HomeViewModel
+import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.HomeViewModel
+import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.ViewState
 import com.test.companydata.stfrontentengchallenge.R
 import com.test.companydata.stfrontentengchallenge.databinding.HomeFragmentBinding
 import org.koin.android.ext.android.inject
@@ -36,21 +37,28 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
             (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         }
     }
-    fun listItemClicked(companyListData: CompanyListData){
-        if(NetworkConnectivity.isNetworkConnected(requireContext())){
-            SingleFragmentActivity.launchFragment(requireContext() ,DetailsFragment.getFragmentInstance(companyListData))
-        }else{
-            DsAlert.showAlert(requireActivity(), getString(R.string.net_error_warning), requireContext().resources.getString(R.string.net_error),"Okay")
-        }
+    fun listItemClicked(companyListData: DashaboardItems){
+//        if(NetworkConnectivity.isNetworkConnected(requireContext())){
+//            SingleFragmentActivity.launchFragment(requireContext() ,DetailsFragment.getFragmentInstance(companyListData))
+//        }else{
+//            DsAlert.showAlert(requireActivity(), getString(R.string.net_error_warning), requireContext().resources.getString(R.string.net_error),"Okay")
+//        }
     }
     fun observeLiveData(){
-        homeViewModel.dbInstance.RoomDataAccessObejct().isDataChanged().observe(viewLifecycleOwner , {
-            dialog?.cancel()
-            initRecyclerView()
+        homeViewModel.itemListDashaboardItems.observe(viewLifecycleOwner , {
+            when(it){
+                is ViewState.Loading->{
+                    dialog?.show()
+                }
+                is ViewState.Message->{
+                    dialog?.cancel()
+                    DsAlert.showAlert(requireActivity(), getString(R.string.net_error_warning), it.message,"Okay")
+                }else -> {
+                    dialog?.cancel()
+                }
+            }
         })
-        if(homeViewModel.dbInstance.RoomDataAccessObejct().isGlobalDataContains().size<1)
-        SingleFragmentActivity.launchFragment(requireContext() ,SearchFragment.getFragmentInstance())
-    }
+       }
 
     @SuppressLint("CheckResult")
     fun initRecyclerView(){

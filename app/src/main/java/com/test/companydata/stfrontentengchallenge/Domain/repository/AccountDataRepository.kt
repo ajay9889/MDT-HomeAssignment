@@ -4,7 +4,7 @@ import com.test.companydata.stfrontentengchallenge.DataSource.module.*
 import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.ViewState
 import io.reactivex.Single
 
-interface AccountDataReposity {
+interface AccountDataRepository {
     suspend fun getAccountBalances() : ViewState<BalanceData>
     suspend fun getPayeesList() : ViewState<PayeesData>
     suspend fun getTransactionsList() : ViewState<TransactionData>

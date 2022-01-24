@@ -29,8 +29,8 @@ object DsAlert {
                   message: String,
                   positiveButton: String
     ): AlertDialog {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            return  AlertDialog.Builder(context,android.R.style.ThemeOverlay_Material_Dialog_Alert)
+        if(Build.VERSION.SDK_INT >= 26){
+            return  AlertDialog.Builder(context,android.R.style.Theme_Material_Dialog)
                 .setTitle(title)
                 .setMessage(message)
                 .setCancelable(true)
@@ -61,25 +61,17 @@ object DsAlert {
 
     fun showAlertLogout(activity: Activity,
                         userAccountViewModel: UserAccountViewModel,
-                        databasehelper: Databasehelper,
                         title: String,
                         message: String,
                         positiveButton: String): AlertDialog {
-        return  AlertDialog.Builder(activity,android.R.style.ThemeOverlay_Material_Dialog_Alert)
+        return  AlertDialog.Builder(activity,android.R.style.Theme_Material_Dialog)
             .setTitle(title)
             .setMessage(message)
             .setCancelable(true)
             .apply { positiveButton.let { positiveString ->
                 setPositiveButton(positiveString) { dialog, which ->
                     dialog.cancel()
-                    userAccountViewModel.onSignOut().apply {
-                        // clearing all data
-                        databasehelper.RoomDataAccessObejct().clearComapnyData()
-                        databasehelper.RoomDataAccessObejct().clearTbGlobalQouteComapnyData().apply {
-                            activity.startActivity(Intent(activity, MainActivity::class.java))
-                            activity.finish()
-                        }
-                    }
+                    userAccountViewModel.onLogOut();
                 }
                 setNegativeButton("No") { dialog, which ->
                     dialog.cancel()

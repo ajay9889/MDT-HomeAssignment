@@ -3,7 +3,6 @@ package com.test.companydata.stfrontentengchallenge.Presentation.Fragments
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
-import android.telephony.PhoneNumberUtils
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -17,7 +16,6 @@ import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.ViewS
 import com.test.companydata.stfrontentengchallenge.R
 import com.test.companydata.stfrontentengchallenge.databinding.SigninBinding
 import org.koin.android.ext.android.inject
-
 
 class SignInFragment : BaseFragment<SigninBinding>(SigninBinding::inflate) {
     val userAccountViewModel: UserAccountViewModel by inject()
@@ -43,18 +41,18 @@ class SignInFragment : BaseFragment<SigninBinding>(SigninBinding::inflate) {
 
             buttonSignIN.setOnClickListener {
                 if(validateField())
-                    userAccountViewModel.onPhoneNumberVerificationsIn(requireActivity(), editTextPhone.text.toString() );
+                    userAccountViewModel.getUserSignIn(editTextUserName.text.toString(), editTextPassword.text.toString());
             }
 
-            editTextPhone.setOnEditorActionListener(object :TextView.OnEditorActionListener{
+            editTextPassword.setOnEditorActionListener(object :TextView.OnEditorActionListener{
                 override fun onEditorAction(
                     v: TextView?,
                     actionId: Int,
                     event: KeyEvent?
                 ): Boolean {
-                    if (actionId == EditorInfo.IME_ACTION_DONE &&  !editTextPhone.text.toString().isNullOrBlank()) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE &&  !editTextPassword.text.toString().isNullOrBlank()) {
                         if(validateField())
-                            userAccountViewModel.onPhoneNumberVerificationsIn(requireActivity(), editTextPhone.text.toString());
+                            userAccountViewModel.getUserSignIn(editTextUserName.text.toString(), editTextPassword.text.toString());
                         return true;
                     }
                     return false;
@@ -69,16 +67,17 @@ class SignInFragment : BaseFragment<SigninBinding>(SigninBinding::inflate) {
     }
     fun validateField(): Boolean{
         with(viewBinding){
-            editTextPhone.setError(null)
-            if(editTextPhone.text.toString().isNullOrBlank())
+            editTextUserName.setError(null)
+            editTextPassword.setError(null)
+            if(editTextUserName.text.toString().isNullOrBlank())
             {
-                editTextPhone.setError("Enter Mobile Number")
-                editTextPhone.isFocusable =true
+                editTextUserName.setError("Enter Username")
+                editTextUserName.isFocusable =true
                 return false
-            }else if(!PhoneNumberUtils.isGlobalPhoneNumber(editTextPhone.text.toString()))
+            }else if(editTextPassword.text.toString().isNullOrBlank())
             {
-                editTextPhone.setError("Enter Valid Mobile Number")
-                editTextPhone.isFocusable =true
+                editTextPassword.setError("Enter Password")
+                editTextPassword.isFocusable =true
                 return false
             }
         }
@@ -91,20 +90,6 @@ class SignInFragment : BaseFragment<SigninBinding>(SigninBinding::inflate) {
                 is ViewState.Loading -> {
                     dialog?.show()
                 }
-//                is ViewState.phoneAuthCredential -> {
-//                    dialog?.cancel()
-//                    userSignInViewModel.signInWithPhoneAuthCredential(requireActivity(), it.mPhoneAuthCredential);
-//                }
-//                is ViewState.verificationCodeToken -> {
-//                    dialog?.cancel()
-//                    with(viewBinding){
-//                        findNavController().navigate(R.id.action_signinFrgmnt_to_otpFragment ,Bundle().apply {
-//                            putString("mobilenumber" , editTextPhone.text.toString())
-//                            putParcelable("tokenPAP" ,userSignInViewModel.tokenPAP)
-//                            putString("verificationPhoneId" ,userSignInViewModel.verificationPhoneId)
-//                        })
-//                    }
-//                }
                 is ViewState.Content -> {
                     dialog?.cancel()
                     requireActivity().startActivity(Intent(context, HomeActivity::class.java))
@@ -112,7 +97,7 @@ class SignInFragment : BaseFragment<SigninBinding>(SigninBinding::inflate) {
                 }
                 is ViewState.Message -> {
                     dialog?.cancel()
-                    it.message?.let { it1 ->
+                    it.message.let { it1 ->
                         DsAlert.showAlert(requireActivity(), getString(R.string.warning),
                             it1,"Okay")
                     }

@@ -8,11 +8,11 @@
         android:id="@+id/homeFragment"
         android:name="com.test.companydata.stfrontentengchallenge.Presentation.Fragments.HomeFragment"
         android:label="@string/dashboard_title_toolbar"
-        tools:layout="@layout/homefragment"/>
+        tools:layout="@layout/activity_dashboard"/>
     <fragment
         android:id="@+id/portFolio"
         android:name="com.test.companydata.stfrontentengchallenge.Presentation.Fragments.TransferFragment"
-        android:label="@string/portfolio_title_toolbar"
+        android:label="@string/transfer_amount"
         tools:layout="@layout/activity_dashboard" >
     </fragment>
 </navigation>
