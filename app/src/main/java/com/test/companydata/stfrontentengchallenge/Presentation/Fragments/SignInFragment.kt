@@ -28,6 +28,7 @@ class SignInFragment : BaseFragment<SigninBinding>(SigninBinding::inflate) {
         super.onViewCreated(view, savedInstanceState)
         setUp()
         observData()
+
     }
     override fun onDestroyView() {
         super.onDestroyView()
