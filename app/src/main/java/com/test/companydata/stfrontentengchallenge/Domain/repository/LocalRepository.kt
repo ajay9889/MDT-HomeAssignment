@@ -5,6 +5,7 @@ import com.test.companydata.stfrontentengchallenge.DataSource.module.UserInfoRem
 import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.ViewState
 
 interface LocalRepository {
-    fun getUserAccountNo() : String?
+    fun getUserAccountNo() : String
+    fun getUserAccountHolder() : String
     fun getJwtTokent() : String?
 }

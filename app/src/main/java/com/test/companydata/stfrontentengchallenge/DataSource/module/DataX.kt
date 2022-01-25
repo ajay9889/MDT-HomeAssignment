@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class DataX(
     @SerializedName("amount")
-    val amount: Int?,
+    val amount: Int?=0,
     @SerializedName("description")
     val description: String?,
     @SerializedName("sender")

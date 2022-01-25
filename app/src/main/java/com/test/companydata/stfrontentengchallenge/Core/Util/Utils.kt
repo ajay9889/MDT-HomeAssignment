@@ -8,42 +8,28 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.test.companydata.Core.apputils.GridSpacingItemDecoration
 import androidx.core.content.ContextCompat.getSystemService
+import java.text.NumberFormat
+import java.text.ParsePosition
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 object Utils {
-
     fun hideKeyboard(context: Context , view: View){
         (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.getWindowToken() ,0 )
     }
-    fun itemGridListDecore(context: Context ,recyclerView: RecyclerView){
-        recyclerView.setHasFixedSize(true)
-        val spanCount = 5 // 3 columns
-        val spacing = 5 // 50px
-        val includeEdge = false
-        val widths = context.resources.displayMetrics.widthPixels.toFloat()
-        val heightPixels = context.resources.displayMetrics.heightPixels.toFloat()
-        val width = widths.toInt()
-        var gridLayoutManager: GridLayoutManager? = null
+    fun getFormatedDate(inComingDate: String): String{
+        val pos = ParsePosition(0)
+        val simpledateformat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        val stringDate = simpledateformat.parse(inComingDate, pos)
 
-        gridLayoutManager = if (widths > heightPixels) {
-            GridLayoutManager(context, 5)
-        } else {
-            if (width < 700) GridLayoutManager(
-                context,
-                2
-            ) else GridLayoutManager(context, 3)
-        }
-        recyclerView.setLayoutManager(gridLayoutManager)
-        val itemDecoration = GridSpacingItemDecoration(spanCount, spacing, includeEdge)
-        recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setOnFlingListener(null);
+        return SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(stringDate)
     }
-
     fun getCurrentDate(): String{
-        return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        return SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).format(Date())
     }
-
-
+    fun getNumberFormated(digits: Double): String{
+        val currency = NumberFormat.getCurrencyInstance();
+        return currency.format(digits)
+    }
 }

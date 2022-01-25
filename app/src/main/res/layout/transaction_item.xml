@@ -1,38 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/header_hieght"
-    xmlns:toop="http://schemas.android.com/tools"
-    app:cardCornerRadius="@dimen/padding_8"
-    android:padding="@dimen/padding_4"
-    android:layout_margin="@dimen/padding_8"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/padding_4">
 
     <LinearLayout
         android:id="@+id/linItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:padding="@dimen/padding_4"
+        android:paddingTop="@dimen/padding_4"
+        android:paddingBottom="@dimen/padding_4"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="@dimen/padding_4"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/symbol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:lines="1"
-                android:maxLines="1"
-                toop:text="MAIN"
-                android:textSize="@dimen/ds_text_size_large"
-                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/name"
@@ -41,22 +27,25 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:maxLines="1"
-                toop:text="subtitle"
-                android:textSize="@dimen/ds_text_size_medium" />
+                tools:text="MAIN"
+                android:textColor="@color/black"
+                android:textSize="@dimen/ds_text_size_large"
+                android:textStyle="bold" />
+
             <TextView
-                android:id="@+id/date"
+                android:id="@+id/accountNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
                 android:maxLines="1"
-                toop:text="subtitle"
-                android:textSize="@dimen/ds_text_size_small" />
-
+                tools:text="subtitle"
+                android:textStyle="bold"
+                android:textSize="@dimen/ds_text_size_medium" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/gain"
+            android:id="@+id/ammount"
             android:textColor="@color/green"
             android:textStyle="bold"
             android:textSize="@dimen/ds_text_size_medium"
@@ -64,7 +53,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            toop:text="+50.0"/>
+            tools:text="+50.0"/>
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>

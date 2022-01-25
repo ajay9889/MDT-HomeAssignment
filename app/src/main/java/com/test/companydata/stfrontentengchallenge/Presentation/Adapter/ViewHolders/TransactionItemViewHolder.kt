@@ -1,23 +1,24 @@
 package com.test.companydata.stfrontentengchallenge.Presentation.Adapter.ViewHolders
-
-import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.ViewGroup
 import com.test.companydata.Core.base.BaseViewHolder
-import com.test.companydata.stfrontentengchallenge.Domain.model.DashaboardItems
-import com.test.companydata.stfrontentengchallenge.databinding.ItemDsrowBinding
+import com.test.companydata.stfrontentengchallenge.Core.Util.Utils
+import com.test.companydata.stfrontentengchallenge.DataSource.module.DataX
+import com.test.companydata.stfrontentengchallenge.databinding.TransactionItemBinding
 
-class TransactionItemViewHolder (viewGroup: ViewGroup,
-                                 val clickItemList:((DashaboardItems)->Unit)?=null): BaseViewHolder <ItemDsrowBinding> (viewGroup ,ItemDsrowBinding::inflate ) {
-    @SuppressLint("CheckResult")
-    fun bindView( companyData: DashaboardItems.Transactions){
+class TransactionItemViewHolder (viewGroup: ViewGroup) : BaseViewHolder <TransactionItemBinding> (viewGroup ,TransactionItemBinding::inflate ) {
+    fun bindView( mTransactions: DataX){
         with(viewBinding){
-//            gain.text = companyData?.gainloss
-//            name.text = companyData?.name
-//            symbol.text = companyData?.symbol
-//            date.text = "Trading Date: ${companyData?.trade_date}"
-//            linItem.setOnClickListener {
-//                clickItemList?.invoke(companyData!!)
-//            }
+            mTransactions.amount?.let {
+                ammount.text = Utils.getNumberFormated(it.toDouble())
+            }
+            if(mTransactions.transactionType?.equals("received") == true){
+                ammount.setTextColor(Color.parseColor("#088E0D"))
+            }else{
+                ammount.setTextColor(Color.parseColor("#000000"))
+            }
+            name.text = mTransactions.sender?.accountHolder
+            accountNo.text =mTransactions.sender?.accountNo
         }
     }
 }

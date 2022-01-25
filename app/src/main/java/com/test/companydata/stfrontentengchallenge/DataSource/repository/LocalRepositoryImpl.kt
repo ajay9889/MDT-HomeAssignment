@@ -7,18 +7,28 @@ import com.test.companydata.stfrontentengchallenge.DataSource.module.UserInfoRem
 import com.test.companydata.stfrontentengchallenge.Domain.repository.LocalRepository
 
 class LocalRepositoryImpl(val context: Context): LocalRepository {
-    override fun getUserAccountNo(): String? {
-        UserSecurePreferences.getLoggedInUserData(context)?.let {
+    override fun getUserAccountNo(): String {
+        UserSecurePreferences.getLoggedInUserData(context,UserSecurePreferences.loginData)?.let {
             if(it.length>0)
             {
-                return Gson().fromJson(it, UserInfoRemoteData::class.java).accountNo
+                return Gson().fromJson(it, UserInfoRemoteData::class.java).accountNo!!
+            }
+        }
+        return ""
+    }
+
+    override fun getUserAccountHolder(): String {
+        UserSecurePreferences.getLoggedInUserData(context,UserSecurePreferences.loginData)?.let {
+            if(it.length>0)
+            {
+                return Gson().fromJson(it, UserInfoRemoteData::class.java).username!!
             }
         }
         return ""
     }
 
     override fun getJwtTokent(): String? {
-        UserSecurePreferences.getLoggedInUserData(context)?.let {
+        UserSecurePreferences.getLoggedInUserData(context,UserSecurePreferences.loginData)?.let {
             if(it.length>0)
             {
                 return Gson().fromJson(it, UserInfoRemoteData::class.java).token

@@ -4,6 +4,7 @@ import com.test.companydata.Core.networkutils.CacheInterceptor
 import com.test.companydata.Core.networkutils.OnlineCacheInterceptor
 import com.test.companydata.stfrontentengchallenge.BuildConfig
 import com.test.companydata.stfrontentengchallenge.Core.networkutils.HeaderIntercepter
+import com.test.companydata.stfrontentengchallenge.Core.networkutils.ResponseIntercepter
 import com.test.companydata.stfrontentengchallenge.DataSource.repository.AccountDataRepositoryImpl
 import com.test.companydata.stfrontentengchallenge.DataSource.repository.LocalRepositoryImpl
 import com.test.companydata.stfrontentengchallenge.DataSource.repository.UserRepositoryImpl
@@ -26,6 +27,15 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 val appModule = module {
+    single {
+        LocalRepositoryImpl(androidContext())
+    }
+    single {
+        UserRepositoryImpl(androidContext() , get())
+    }
+    single {
+        AccountDataRepositoryImpl(androidContext() , get())
+    }
     single{
         OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
@@ -39,8 +49,8 @@ val appModule = module {
             }
             .addInterceptor(CacheInterceptor(androidContext()))
             .addNetworkInterceptor(OnlineCacheInterceptor())
+            .addInterceptor(ResponseIntercepter(androidContext()))
             .addInterceptor(HeaderIntercepter(androidContext()))
-
             .cache(Cache(File(androidContext().cacheDir, "api"), 1024 * 1024 * 1024L)).build()
     }
     single {
@@ -53,20 +63,10 @@ val appModule = module {
     }
 }
 val viewModelModule = module {
-    single {
-        LocalRepositoryImpl(androidContext())
-    }
-    single {
-        UserRepositoryImpl(androidContext() , get())
-    }
-    single {
-        AccountDataRepositoryImpl(androidContext() , get())
-    }
     viewModel {
         UserAccountViewModel(androidApplication() as MainApplication,  UserRepositoryImpl(androidContext() , get()))
     }
     viewModel {
-        HomeViewModel(androidApplication() as MainApplication, get())
+        HomeViewModel(androidApplication() as MainApplication, AccountDataRepositoryImpl(androidContext() , get()))
     }
-
 }

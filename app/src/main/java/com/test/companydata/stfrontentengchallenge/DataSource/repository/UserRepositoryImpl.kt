@@ -19,7 +19,7 @@ import okhttp3.RequestBody
 
 class UserRepositoryImpl(val context: Context, val retrofit: Retrofit): UserRepository {
     override suspend fun getUserLoggedInInformations(): ViewState<UserInfoRemoteData> {
-        UserSecurePreferences.getLoggedInUserData(context)?.let {
+        UserSecurePreferences.getLoggedInUserData(context,UserSecurePreferences.loginData)?.let {
             Log.d("TAG" , "$it")
              if(it.length>0){
                    Gson().fromJson(it, UserInfoRemoteData::class.java)?.let {

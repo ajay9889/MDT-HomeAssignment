@@ -29,15 +29,8 @@ object UserSecurePreferences {
         }
     }
 
-    fun getLoggedInUserData(context: Context):String?{
-        val mUserData = UserInfoRemoteData(
-            accountNo = "",
-            status = "",
-            token = "",
-            username = "",
-            error = ""
-        )
-        return getSecurePreferences(context).getString(loginData, Gson().toJson(mUserData))
+    fun getLoggedInUserData(context: Context ,aliase: String ):String?{
+        return getSecurePreferences(context).getString(aliase, Gson().toJson(UserInfoRemoteData.getDefaultUserData()))
     }
 
     fun getUserLogout(context: Context){

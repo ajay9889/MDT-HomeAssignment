@@ -5,8 +5,9 @@ import okhttp3.Response
 import java.io.IOException
 import kotlin.jvm.Throws
 
+// cache interecepter to manage offline if needed
 class CacheInterceptor (private val context: Context) : Interceptor {
-    private val maxStale = 60 * 60 * 24 * 19
+    private val maxStale = 60 * 60 * 24 * 1
     @Throws(IOException::class)
     override
     fun intercept(chain: Interceptor.Chain): Response {
@@ -27,7 +28,7 @@ class OnlineCacheInterceptor : Interceptor {
     override
     fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.proceed(chain.request())
-        val maxAge = 0 // read from cache for 0 second even if there is internet connection
+        val maxAge = 0
         return response.newBuilder()
                 .header("Cache-Control", "public, max-age=$maxAge")
                 .removeHeader("Pragma")

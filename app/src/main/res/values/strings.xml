@@ -1,5 +1,4 @@
 <resources>
-
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Login Fragment</string>
@@ -19,11 +18,9 @@
     <string name="otp_verify_accnt">OTP Verification !</string>
     <string name="verify_accnt">Verify Phone Number !</string>
     <string name="signin"><u>LOGIN</u></string>
-
     <string name="didn_rec_otp">Didn\'t received an OTP?</string>
     <string name="resendotp"><u>Resend OTP</u></string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-
     <string name="warning">Alert!</string>
     <string name="net_error_warning">Network error!</string>
     <string name="net_error">Please check internet connection.</string>
@@ -33,18 +30,12 @@
     <string name="transfer_amount">Transfer Now</string>
     <string name="invalid_request">Invalid request</string>
     <string name="dashboard_title_toolbar">Dashboard</string>
-    <string name="gainlosstitle">Gainers and Lossers</string>
-    <string name="watchlisttitle">Your Watchlist</string>
-
+    <string name="balance_accnt">Account Balance</string>
+    <string name="trns_accnt">Your Transaction History</string>
     <string name="some_error">Some Error Occurred, Please try again!</string>
     <string name="search_hint">Search symbols e.g. AAPL, MSFT, NFLX</string>
     <string name="search_copytext">Search your interests to follow on the NYSE/Nasdaq stock exchanges, learn more information about the stocks, and add them to your portfolio</string>
-
-
     <string name="show_comming_soon_message">Coming Soon!</string>
-
-
     <string name="logout_warn">Logout</string>
     <string name="logout_msg">Do you want to logout?</string>
-
 </resources>

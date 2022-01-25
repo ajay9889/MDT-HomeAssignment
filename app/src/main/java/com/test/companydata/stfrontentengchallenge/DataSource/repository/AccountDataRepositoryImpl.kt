@@ -13,8 +13,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Retrofit
-import retrofit2.http.Query
-
 
 class AccountDataRepositoryImpl(val context: Context, val retrofit: Retrofit): AccountDataRepository {
     override suspend fun getAccountBalances(): ViewState<BalanceData> {

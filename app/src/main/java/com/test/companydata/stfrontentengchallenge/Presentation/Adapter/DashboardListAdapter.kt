@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.test.companydata.stfrontentengchallenge.Domain.model.DashaboardItems
 import com.test.companydata.stfrontentengchallenge.Presentation.Adapter.ViewHolders.BalanceItemViewHolder
+import com.test.companydata.stfrontentengchallenge.Presentation.Adapter.ViewHolders.TitleItemViewHolder
 import com.test.companydata.stfrontentengchallenge.Presentation.Adapter.ViewHolders.TransactionItemViewHolder
+import com.test.companydata.stfrontentengchallenge.Presentation.Adapter.ViewHolders.TransactionRowViewHolder
 
-class DashboardListAdapter(private val context: Context,
-        private val onClickItems: ((DashaboardItems)->Unit)? =null
-): PagingDataAdapter<DashaboardItems, RecyclerView.ViewHolder> (DataDifferentiator){
+class DashboardListAdapter : PagingDataAdapter<DashaboardItems, RecyclerView.ViewHolder> (DataDifferentiator){
     object DataDifferentiator: DiffUtil.ItemCallback<DashaboardItems>(){
         override fun areItemsTheSame(oldItem: DashaboardItems, newItem: DashaboardItems): Boolean {
             return oldItem == newItem
@@ -24,9 +24,9 @@ class DashboardListAdapter(private val context: Context,
 
     override fun getItemViewType(position: Int): Int {
         getItem(position)?.let {
-            if(it is DashaboardItems.Ballance)
+            if (it is DashaboardItems.Ballance) {
                 return 0
-            else{
+            } else if (it is DashaboardItems.Title) {
                 return 1
             }
         }
@@ -40,7 +40,13 @@ class DashboardListAdapter(private val context: Context,
                     holder.bindView(it)
                 }
             }
-            is TransactionItemViewHolder ->{
+            is TitleItemViewHolder ->{
+                getItem(position)?.let {it->
+                    if(it is DashaboardItems.Title )
+                        holder.bindView(it)
+                }
+            }
+            is TransactionRowViewHolder ->{
                 getItem(position)?.let {
                     if(it is DashaboardItems.Transactions )
                         holder.bindView(it)
@@ -54,8 +60,11 @@ class DashboardListAdapter(private val context: Context,
             0->{
                 BalanceItemViewHolder(parent)
             }
+            1->{
+                TitleItemViewHolder(parent)
+            }
             else->{
-                TransactionItemViewHolder(parent,onClickItems)
+                TransactionRowViewHolder(parent)
             }
         }
     }
