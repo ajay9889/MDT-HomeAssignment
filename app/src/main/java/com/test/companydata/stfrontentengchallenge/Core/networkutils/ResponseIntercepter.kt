@@ -1,6 +1,7 @@
 package com.test.companydata.stfrontentengchallenge.Core.networkutils
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.text.TextUtils
 import android.util.Log
 import com.test.companydata.stfrontentengchallenge.Core.Util.UserSecurePreferences
@@ -36,6 +37,7 @@ class ResponseIntercepter (val context: Context) : Interceptor {
                     CoroutineScope(Dispatchers.Main).launch {
                         context.startActivity(Intent(context, MainActivity::class.java).apply {
                             this.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            this.setFlags(FLAG_ACTIVITY_NEW_TASK)
                         })
 
                     }

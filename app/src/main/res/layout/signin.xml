@@ -18,6 +18,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="@dimen/ds_text_size_xxlarge"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,6 +41,7 @@
             android:text="@string/signin_title"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:textSize="@dimen/ds_text_size_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

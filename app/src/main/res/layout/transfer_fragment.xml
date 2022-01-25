@@ -9,7 +9,7 @@
     android:fillViewport="true">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/bgcolorgradient">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/inputBoxContainer"
@@ -26,12 +26,13 @@
             android:id="@+id/titleMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/transfer"
+            android:text="Transfer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:textSize="@dimen/ds_text_size_large"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.2"/>
@@ -65,7 +66,7 @@
             android:textColorHint="@color/grey_transparent_layout"
             android:hint="Amount"
             android:imeOptions="actionNext"
-            app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintVertical_bias="0.15"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,9 +84,9 @@
             android:imeActionId="6"
             android:imeOptions="actionDone"
             android:hint="Description"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="28dp"
             android:textColorHint="@color/grey_transparent_layout"
-            app:layout_constraintVertical_bias="0.2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

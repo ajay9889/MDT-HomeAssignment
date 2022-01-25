@@ -15,7 +15,9 @@ import com.test.companydata.stfrontentengchallenge.R
 import com.test.companydata.stfrontentengchallenge.databinding.HomeFragmentBinding
 import org.koin.android.ext.android.inject
 
-
+/*
+   * Dashbord to show the balance
+   */
 class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate) {
     var dialog: ProgressDialog? = null
     val homeViewModel: HomeViewModel by inject()

@@ -25,6 +25,10 @@ class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::i
             setSupportActionBar(this)
         }
 
+        /*
+         * Navigation graph to manage the screen navigations
+         */
+
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
 
@@ -33,6 +37,9 @@ class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::i
     }
 
 
+    /*
+    * Navigation graph to manage the back screen
+    */
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)

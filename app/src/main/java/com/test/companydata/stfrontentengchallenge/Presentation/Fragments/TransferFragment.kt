@@ -2,12 +2,17 @@ package com.test.companydata.stfrontentengchallenge.Presentation.Fragments
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.test.companydata.Core.apputils.DsAlert
 import com.test.companydata.Core.base.BaseFragment
 import com.test.companydata.Core.networkutils.NetworkConnectivity
+import com.test.companydata.stfrontentengchallenge.Core.Util.AmountDigitsInputFilter
+import com.test.companydata.stfrontentengchallenge.Core.Util.Utils
 import com.test.companydata.stfrontentengchallenge.DataSource.module.PayeesData
 import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.HomeViewModel
 import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.ViewState
@@ -84,7 +89,6 @@ class TransferFragment : BaseFragment<TransferFragmentBinding>(TransferFragmentB
             requireContext(),
             android.R.layout.simple_dropdown_item_1line, payeesName.toTypedArray()
         )
-
         with(viewBinding){
             selectPayees.setAdapter(adapter)
             selectPayees.setOnItemClickListener(object : AdapterView.OnItemClickListener{
@@ -93,13 +97,26 @@ class TransferFragment : BaseFragment<TransferFragmentBinding>(TransferFragmentB
                     view: View?,
                     position: Int,
                     id: Long
-                ) {
-
-                }
+                ) {}
             })
         }
     }
 
+   val mTextWatcher = object: TextWatcher{
+        override fun beforeTextChanged(
+            s: CharSequence?,
+            start: Int,
+            count: Int,
+            after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable?) {
+            with(viewBinding){
+                if(!editTextAmount.text.toString().isNullOrBlank() && !editTextAmount.text.toString().contains("$")){
+                    editTextAmount.setText(Utils.getNumberFormated(editTextAmount.text.toString().toDouble()))
+                }
+            }
+        }
+    }
 
     fun validateField(): Boolean{
         with(viewBinding){
@@ -129,21 +146,26 @@ class TransferFragment : BaseFragment<TransferFragmentBinding>(TransferFragmentB
         with(viewBinding){
             dialog = DsAlert.onCreateDialog(requireContext())
             dialog?.cancel()
+            editTextDesc.addTextChangedListener(mTextWatcher)
+            selectPayees.addTextChangedListener(mTextWatcher)
+            editTextAmount.setFilters(arrayOf<InputFilter>(AmountDigitsInputFilter()))
             buttonTransfer.setOnClickListener {
-                if(validateField() && NetworkConnectivity.isNetworkConnected(requireContext())){
-                    val selectedItem=payeesData?.data?.filter {it.name.equals(selectPayees.text.toString().trim())}
-                    if (selectedItem != null) {
-                        if(selectedItem.size>0){
-                            dialog?.show()
-                            selectedItem.get(0).accountNo?.let { it1 ->
-                                mHomeViewModel.getAmountTransferToPayee(
-                                    it1,editTextAmount.text.toString(),editTextDesc.text.toString())
-                        }
-                    }}
-                }else{
-                    DsAlert.showAlert(requireActivity(),
-                        requireContext().resources.getString(R.string.net_error_warning),
-                        requireContext().resources.getString(R.string.net_error),"Okay")
+                if(validateField()){
+                    if(NetworkConnectivity.isNetworkConnected(requireContext())){
+                        val selectedItem=payeesData?.data?.filter {it.name.equals(selectPayees.text.toString().trim())}
+                        if (selectedItem != null) {
+                            if(selectedItem.size>0){
+                                dialog?.show()
+                                selectedItem.get(0).accountNo?.let { it1 ->
+                                    mHomeViewModel.getAmountTransferToPayee(
+                                        it1,editTextAmount.text.toString(),editTextDesc.text.toString())
+                                }
+                            }}
+                    }else{
+                        DsAlert.showAlert(requireActivity(),
+                            requireContext().resources.getString(R.string.net_error_warning),
+                            requireContext().resources.getString(R.string.net_error),"Okay")
+                    }
                 }
             }
         }
