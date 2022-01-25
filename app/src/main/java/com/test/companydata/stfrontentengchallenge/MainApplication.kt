@@ -12,6 +12,8 @@ import org.koin.core.context.stopKoin
 import org.koin.core.logger.Level
 
 class MainApplication : MultiDexApplication() {
+
+    // koin dependency injection using koin librsry
     private val modules = listOf(
         appModule, viewModelModule
     )
