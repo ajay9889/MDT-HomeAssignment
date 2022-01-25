@@ -1,4 +1,5 @@
 package com.test.companydata.stfrontentengchallenge.Presentation.ViewModels
+
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,14 +10,15 @@ import androidx.paging.PagingState
 import androidx.paging.rxjava2.cachedIn
 import androidx.paging.rxjava2.flowable
 import com.test.companydata.stfrontentengchallenge.Core.Util.Utils
+import com.test.companydata.stfrontentengchallenge.DataSource.module.BalanceData
 import com.test.companydata.stfrontentengchallenge.DataSource.module.DataX
+import com.test.companydata.stfrontentengchallenge.DataSource.module.PayeesData
 import com.test.companydata.stfrontentengchallenge.DataSource.repository.LocalRepositoryImpl
 import com.test.companydata.stfrontentengchallenge.Domain.model.DashaboardItems
 import com.test.companydata.stfrontentengchallenge.Domain.repository.AccountDataRepository
-import com.test.companydata.stfrontentengchallenge.Domain.repository.LocalRepository
 import com.test.companydata.stfrontentengchallenge.MainApplication
 import com.test.companydata.stfrontentengchallenge.R
-import org.koin.java.KoinJavaComponent.inject
+import kotlinx.coroutines.launch
 
 class HomeViewModel(val application: MainApplication,
                     val accntRepository : AccountDataRepository): AndroidViewModel(application){
@@ -25,11 +27,23 @@ class HomeViewModel(val application: MainApplication,
      * */
 
     val itemListDashaboardItems = MutableLiveData<ViewState<DashaboardItems>>()
+
     /**
-     * Manage the
+     * Manage amount tranfer
      * */
+    val balanceData= MutableLiveData<ViewState<BalanceData>>()
+    val payeList= MutableLiveData<ViewState<PayeesData>>()
 
-
+    fun getPayee()=viewModelScope.launch{
+        accntRepository.getPayeesList().let {
+            payeList.value = it
+        }
+    }
+    fun getAmountTransferToPayee(accountNo: String , amount: String , description: String)=viewModelScope.launch{
+        accntRepository.getTransferBalance(accountNo,amount, Utils.getCurrentDate() ,description ).let {
+            balanceData.value = it
+        }
+    }
 
     /**
      * Load home screen data using pagging data source
@@ -66,6 +80,7 @@ class ItemListPagingSource(val application : MainApplication ,
                        val items = it.data
                        items.accountHolder = LocalRepositoryImpl(application.applicationContext).getUserAccountHolder()
                        dashbboardData.add(DashaboardItems.Ballance(items))
+                       itemListDashaboardItems.postValue(ViewState.Finished())
                    }
                    is ViewState.Message->{
                        itemListDashaboardItems.postValue(ViewState.Message(it.message))

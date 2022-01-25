@@ -71,7 +71,7 @@ class SignInFragment : BaseFragment<SigninBinding>(SigninBinding::inflate) {
             editTextPassword.setError(null)
             if(editTextUserName.text.toString().isNullOrBlank())
             {
-                editTextUserName.setError("Enter Username")
+                editTextUserName.setError("Username")
                 editTextUserName.isFocusable =true
                 return false
             }else if(editTextPassword.text.toString().isNullOrBlank())

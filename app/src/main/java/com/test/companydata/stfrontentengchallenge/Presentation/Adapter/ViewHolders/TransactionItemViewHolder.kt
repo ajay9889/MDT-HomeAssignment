@@ -9,16 +9,23 @@ import com.test.companydata.stfrontentengchallenge.databinding.TransactionItemBi
 class TransactionItemViewHolder (viewGroup: ViewGroup) : BaseViewHolder <TransactionItemBinding> (viewGroup ,TransactionItemBinding::inflate ) {
     fun bindView( mTransactions: DataX){
         with(viewBinding){
-            mTransactions.amount?.let {
-                ammount.text = Utils.getNumberFormated(it.toDouble())
-            }
+
             if(mTransactions.transactionType?.equals("received") == true){
                 ammount.setTextColor(Color.parseColor("#088E0D"))
+                name.text = mTransactions.sender?.accountHolder
+                accountNo.text =mTransactions.sender?.accountNo
+                mTransactions.amount?.let {
+                    ammount.text = Utils.getNumberFormated(it.toDouble())
+                }
             }else{
                 ammount.setTextColor(Color.parseColor("#000000"))
+                name.text = mTransactions.receipient?.accountHolder
+                accountNo.text =mTransactions.receipient?.accountNo
+                mTransactions.amount?.let {
+                    ammount.text = "-"+Utils.getNumberFormated(it.toDouble())
+                }
             }
-            name.text = mTransactions.sender?.accountHolder
-            accountNo.text =mTransactions.sender?.accountNo
+
         }
     }
 }

@@ -70,8 +70,8 @@ class AccountDataRepositoryImpl(val context: Context, val retrofit: Retrofit): A
         val body: RequestBody = RequestBody.create(
             mime,
             JSONObject().apply {
-                this.put("recipientAccountNo",recipientAccountNo)
-                this.put("amount",amount)
+                this.put("receipientAccountNo",recipientAccountNo)
+                this.put("amount",amount.toInt())
                 this.put("date",date)
                 this.put("description",description)
             }.toString())

@@ -10,10 +10,20 @@ data class DataX(
     val description: String?,
     @SerializedName("sender")
     val sender: Sender?,
+    @SerializedName("receipient")
+    val receipient: Receipient?,
     @SerializedName("transactionDate")
     val transactionDate: String?,
     @SerializedName("transactionId")
     val transactionId: String?,
     @SerializedName("transactionType")
     val transactionType: String?
+)
+
+
+data class Receipient(
+    @SerializedName("accountHolder")
+    val accountHolder: String?,
+    @SerializedName("accountNo")
+    val accountNo: String?
 )

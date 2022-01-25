@@ -1,5 +1,6 @@
 package com.test.companydata.stfrontentengchallenge.Presentation.Fragments
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,7 @@ import org.koin.android.ext.android.inject
 
 
 class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate) {
+    var dialog: ProgressDialog? = null
     val homeViewModel: HomeViewModel by inject()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,6 +26,8 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
         initRecyclerView()
     }
     fun setUPView(){
+        dialog = DsAlert.onCreateDialog(requireContext())
+        dialog?.show()
         val adapterL= DashboardListAdapter()
         with(viewBinding.recyclerviewDashboardHome) {
             adapter = adapterL
@@ -36,13 +40,16 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
         homeViewModel.itemListDashaboardItems.observe(viewLifecycleOwner , {
             when(it){
                 is ViewState.Message->{
+                    dialog?.cancel()
                     DsAlert.showAlert(requireActivity(), getString(R.string.net_error_warning), it.message,"Okay")
                 }else -> {
+                    dialog?.cancel()
                 }
             }
         })
        }
 
+    @SuppressLint("CheckResult")
     fun initRecyclerView(){
         with(viewBinding){
             recyclerviewDashboardHome.invalidate()

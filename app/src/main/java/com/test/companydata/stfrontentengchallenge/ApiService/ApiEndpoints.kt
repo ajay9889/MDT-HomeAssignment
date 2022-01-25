@@ -33,7 +33,7 @@ interface ApiEndpoints {
     @GET("payees")
     suspend fun getPayees():Response<PayeesData>
 
-    @GET("transactions")
+    @POST("transfer")
     suspend fun getTransferBalance(
         @Body params : RequestBody
     ):Response<BalanceData>

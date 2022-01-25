@@ -26,7 +26,7 @@
     <string name="net_error">Please check internet connection.</string>
     <string name="normal_error">Try again, Possible no records..!</string>
     <string name="ok_btn">Okay</string>
-    <string name="transfer">Transfer</string>
+    <string name="transfer">Bank Transfer</string>
     <string name="transfer_amount">Transfer Now</string>
     <string name="invalid_request">Invalid request</string>
     <string name="dashboard_title_toolbar">Dashboard</string>
@@ -38,4 +38,8 @@
     <string name="show_comming_soon_message">Coming Soon!</string>
     <string name="logout_warn">Logout</string>
     <string name="logout_msg">Do you want to logout?</string>
+
+    <string name="transfer_success">Successful!</string>
+    <string name="transfer_msg">Amount successfully transferred.</string>
+
 </resources>
