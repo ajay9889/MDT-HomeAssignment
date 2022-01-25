@@ -102,6 +102,7 @@ class RegisterFragment : BaseFragment<RegisterBinding>(RegisterBinding::inflate)
                 }
                 is ViewState.Content -> {
                     dialog?.cancel()
+                    with(viewBinding){Utils.hideKeyboard(requireContext() , editTextPassword)}
                     requireActivity().startActivity(Intent(context, HomeActivity::class.java))
                     requireActivity().finish()
                 }

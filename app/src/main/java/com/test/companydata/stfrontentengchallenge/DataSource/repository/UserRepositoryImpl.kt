@@ -85,15 +85,9 @@ class UserRepositoryImpl(val context: Context, val retrofit: Retrofit): UserRepo
                     return ViewState.Content(it)
                 }
             }else{
-                when(it){
-                    is retrofit2.HttpException -> {
-                        it.response()?.errorBody()?.let {
-                            return ViewState.Message(JSONObject(it.string()).getString("error"))
-                        }
-                    }
-                    else -> { }
+                it.errorBody()?.let {
+                    return ViewState.Message(JSONObject(it.string()).getString("error"))
                 }
-
             }
         }
         return ViewState.Message(context.resources.getString(R.string.some_error))

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.test.companydata.Core.apputils.DsAlert
 import com.test.companydata.Core.base.BaseFragment
+import com.test.companydata.stfrontentengchallenge.Core.Util.Utils
 import com.test.companydata.stfrontentengchallenge.Presentation.Activity.HomeActivity
 import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.UserAccountViewModel
 import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.ViewState
@@ -93,6 +94,7 @@ class SignInFragment : BaseFragment<SigninBinding>(SigninBinding::inflate) {
                 }
                 is ViewState.Content -> {
                     dialog?.cancel()
+                    with(viewBinding){ Utils.hideKeyboard(requireContext() , editTextPassword)}
                     requireActivity().startActivity(Intent(context, HomeActivity::class.java))
                     requireActivity().finish()
                 }
