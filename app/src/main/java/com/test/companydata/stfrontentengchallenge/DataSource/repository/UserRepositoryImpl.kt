@@ -81,8 +81,11 @@ class UserRepositoryImpl(val context: Context, val retrofit: Retrofit): UserRepo
         ).let {
             if(it.isSuccessful){
                 it.body()?.let {
-                    UserSecurePreferences.saveUserInformationInLocalSecurePreferences(context ,it );
-                    return ViewState.Content(it)
+                    val userInfo=it
+                    if(userInfo.username.isNullOrBlank())
+                    userInfo.username= username
+                    UserSecurePreferences.saveUserInformationInLocalSecurePreferences(context ,userInfo);
+                    return ViewState.Content(userInfo)
                 }
             }else{
                 it.errorBody()?.let {

@@ -11,7 +11,7 @@ data class UserInfoRemoteData(
     @SerializedName("token")
     val token: String?,
     @SerializedName("username")
-    val username: String?,
+    var username: String?="",
     @SerializedName("error")
     val error: String?,
 ): Serializable{

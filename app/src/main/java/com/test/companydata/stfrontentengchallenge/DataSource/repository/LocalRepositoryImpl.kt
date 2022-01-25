@@ -21,7 +21,7 @@ class LocalRepositoryImpl(val context: Context): LocalRepository {
         UserSecurePreferences.getLoggedInUserData(context,UserSecurePreferences.loginData)?.let {
             if(it.length>0)
             {
-                return Gson().fromJson(it, UserInfoRemoteData::class.java).username!!
+                return Gson().fromJson(it, UserInfoRemoteData::class.java).username?:""
             }
         }
         return ""

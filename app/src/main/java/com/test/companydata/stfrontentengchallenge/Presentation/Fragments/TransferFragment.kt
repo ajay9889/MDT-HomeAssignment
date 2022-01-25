@@ -39,8 +39,13 @@ class TransferFragment : BaseFragment<TransferFragmentBinding>(TransferFragmentB
             when(it) {
                 is ViewState.Content -> {
                     dialog?.cancel()
-                    if(it.data?.status.equals("success"))
+                    if(it.data.status.equals("success"))
                     {
+                        with(viewBinding){
+                            selectPayees.setText("")
+                            editTextAmount.setText("")
+                            editTextDesc.setText("")
+                        }
                         DsAlert.showAlert(requireActivity(),
                             requireContext().resources.getString(R.string.transfer_success),
                             requireContext().resources.getString(R.string.transfer_msg),"Done")
