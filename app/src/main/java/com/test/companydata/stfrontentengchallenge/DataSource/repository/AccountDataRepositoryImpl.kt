@@ -71,7 +71,7 @@ class AccountDataRepositoryImpl(val context: Context, val retrofit: Retrofit): A
             mime,
             JSONObject().apply {
                 this.put("receipientAccountNo",recipientAccountNo)
-                this.put("amount",amount.toInt())
+                this.put("amount",amount.replace("$","").toDouble())
                 this.put("date",date)
                 this.put("description",description)
             }.toString())

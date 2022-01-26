@@ -38,7 +38,7 @@
     <string name="show_comming_soon_message">Coming Soon!</string>
     <string name="logout_warn">Logout</string>
     <string name="logout_msg">Do you want to logout?</string>
-
+    <string name="payeename">Please enter valid payees name.</string>
     <string name="transfer_success">Successful!</string>
     <string name="transfer_msg">Amount successfully transferred.</string>
 

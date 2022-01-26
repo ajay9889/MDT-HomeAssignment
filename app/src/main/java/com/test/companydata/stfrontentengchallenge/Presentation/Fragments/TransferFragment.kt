@@ -160,7 +160,12 @@ class TransferFragment : BaseFragment<TransferFragmentBinding>(TransferFragmentB
                                     mHomeViewModel.getAmountTransferToPayee(
                                         it1,editTextAmount.text.toString(),editTextDesc.text.toString())
                                 }
-                            }}
+                            }else{
+                                DsAlert.showAlert(requireActivity(),
+                                    requireContext().resources.getString(R.string.warning),
+                                    requireContext().resources.getString(R.string.payeename),"Okay")
+                            }
+                        }
                     }else{
                         DsAlert.showAlert(requireActivity(),
                             requireContext().resources.getString(R.string.net_error_warning),

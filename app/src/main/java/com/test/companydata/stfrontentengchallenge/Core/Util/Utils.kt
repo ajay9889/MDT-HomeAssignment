@@ -15,6 +15,7 @@ import java.util.*
 
 
 object Utils {
+    const val ACTION_LOGOUT="com.intent.ACTION_LOGOUT"
     fun hideKeyboard(context: Context , view: View){
         (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.getWindowToken() ,0 )
     }

@@ -21,6 +21,7 @@ import org.koin.android.ext.android.inject
 class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate) {
     var dialog: ProgressDialog? = null
     val homeViewModel: HomeViewModel by inject()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUPView();
