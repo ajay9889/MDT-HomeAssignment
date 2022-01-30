@@ -1,7 +1,6 @@
 package com.test.companydata.stfrontentengchallenge.DataSource.repository
 
 import android.content.Context
-import android.util.Log
 import com.google.gson.Gson
 import com.test.companydata.ApiService.ApiEndpoints
 import com.test.companydata.stfrontentengchallenge.Core.Util.UserSecurePreferences
@@ -9,21 +8,18 @@ import com.test.companydata.stfrontentengchallenge.DataSource.module.UserInfoRem
 import com.test.companydata.stfrontentengchallenge.Domain.repository.UserRepository
 import com.test.companydata.stfrontentengchallenge.Presentation.ViewModels.ViewState
 import com.test.companydata.stfrontentengchallenge.R
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Retrofit
-import okhttp3.RequestBody
 
 
 
 class UserRepositoryImpl(val context: Context, val retrofit: Retrofit): UserRepository {
     override suspend fun getUserLoggedInInformations(): ViewState<UserInfoRemoteData> {
         UserSecurePreferences.getLoggedInUserData(context,UserSecurePreferences.loginData)?.let {
-            Log.d("TAG" , "$it")
              if(it.length>0){
                    Gson().fromJson(it, UserInfoRemoteData::class.java)?.let {
-                       Log.d("TAG_!" , "$it")
                        return ViewState.Content(it)
                  }
              }
