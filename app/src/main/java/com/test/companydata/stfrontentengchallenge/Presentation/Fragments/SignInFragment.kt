@@ -54,7 +54,8 @@ class SignInFragment : BaseFragment<SigninBinding>(SigninBinding::inflate) {
                 ): Boolean {
                     if (actionId == EditorInfo.IME_ACTION_DONE &&  !editTextPassword.text.toString().isNullOrBlank()) {
                         if(validateField())
-                            userAccountViewModel.getUserSignIn(editTextUserName.text.toString(), editTextPassword.text.toString());
+                            userAccountViewModel.getUserSignIn(editTextUserName.text.toString(),
+                                editTextPassword.text.toString());
                         return true;
                     }
                     return false;
